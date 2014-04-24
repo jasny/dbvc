@@ -9,12 +9,12 @@ use ConsoleKit\Colors, ConsoleKit\TextFormater, Jasny\ConsoleKit\Widgets\Table;
  * 
  * @usage $0 status [options]
  * 
- * @opt --quiet        -q  Don't output any message
- * @opt --verbose      -v  Increase verbosity
- * @opt --working-dir      If specified, use the given directory as working directory
- * @opt --notification -n  Output as notification
- * @opt --all          -a  Show a lists with all updates and their status
- * @opt --short        -s  Use abbreviations and exclude annotations
+ * @opt --quiet           -q  Don't output any message
+ * @opt --verbose         -v  Increase verbosity
+ * @opt --working-dir=DIR     If specified, use the given directory as working directory
+ * @opt --notification    -n  Output as notification
+ * @opt --all             -a  Show a lists with all updates and their status
+ * @opt --short           -s  Use abbreviations and exclude annotations
  * 
  * @example `$0 status`       Show updates that need to be run
  * @example `$0 status -asq`  Show machine processable list with all updated

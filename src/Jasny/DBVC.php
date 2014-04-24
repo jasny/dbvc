@@ -59,7 +59,7 @@ class DBVC
             throw new \RuntimeException("DBVC could not find a dbvc.json file in " . getcwd());
         
         $this->config = json_decode(file_get_contents('dbvc.json'));
-        if (!isset($this->config->datadir)) $this->config->datadir = 'dbvc';
+        if (!isset($this->config->datadir)) $this->config->datadir = 'dev';
     }
     
     /**

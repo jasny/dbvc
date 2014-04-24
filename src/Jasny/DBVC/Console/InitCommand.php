@@ -9,9 +9,9 @@ use ConsoleKit\Colors;
  * 
  * @usage $0 init [options]
  * 
- * @opt --quiet       -q  Don't output any message
- * @opt --verbose     -v  Increase verbosity
- * @opt --working-dir     If specified, use the given directory as working directory
+ * @opt --quiet           -q  Don't output any message
+ * @opt --verbose         -v  Increase verbosity
+ * @opt --working-dir=DIR     If specified, use the given directory as working directory
  */
 class InitCommand extends Command
 {
@@ -30,6 +30,7 @@ class InitCommand extends Command
         }
         
         $this->dbvc()->db()->init();
+        $this->createDataDir();
         
         if ($this->verbosity) {
             $this->writeln("Initialised {$this->dbvc->config->db->dbname}");
@@ -37,8 +38,8 @@ class InitCommand extends Command
             $updates = $this->dbvc()->getUpdatesAvailable();
             if ($updates) {
                 $scriptName = basename($_SERVER['SCRIPT_FILENAME']);
-                $this->writeln("\nWarning: There are " . count($count) . " updates that may already have been applied to "
-                    . "the database. Use `$scriptName mark` to mark those updates as done.");
+                $this->writeln("Warning: There are " . count($updates) . " updates that may already have been applied"
+                    . " to the database. Use `$scriptName mark` to mark those updates as done.", Colors::YELLOW);
             }
         }
     }
@@ -67,5 +68,15 @@ class InitCommand extends Command
         }
        
         return true;
-    }    
+    }
+
+    /**
+     * Create the data directory.
+     */
+    protected function createDataDir()
+    {
+        $dir = $this->dbvc()->config->datadir;
+        if (!file_exists($dir)) mkdir($dir);
+        if (!file_exists($dir . DIRECTORY_SEPARATOR . 'updates')) mkdir($dir . DIRECTORY_SEPARATOR . 'updates');
+    }
 }

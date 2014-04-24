@@ -7,12 +7,12 @@ use ConsoleKit\Colors, ConsoleKit\Widgets\Checklist;
 /**
  * Update the database.
  * 
- * @usage $0 init [update ...] [options]
+ * @usage $0 update [update ...] [options]
  * 
- * @opt --quiet       -q  Don't output any message
- * @opt --verbose     -v  Increase verbosity
- * @opt --working-dir     If specified, use the given directory as working directory
- * @opt --force       -f  Continue after an error
+ * @opt --quiet           -q  Don't output any message
+ * @opt --verbose         -v  Increase verbosity
+ * @opt --working-dir=DIR     If specified, use the given directory as working directory
+ * @opt --force           -f  Continue after an error
  */
 class UpdateCommand extends Command
 {

@@ -9,9 +9,9 @@ use ConsoleKit\Colors;
  * 
  * @usage $0 create [options]
  * 
- * @opt --quiet       -q  Don't output any message
- * @opt --verbose     -v  Increase verbosity
- * @opt --working-dir     If specified, use the given directory as working directory
+ * @opt --quiet           -q  Don't output any message
+ * @opt --verbose         -v  Increase verbosity
+ * @opt --working-dir=DIR     If specified, use the given directory as working directory
  */
 class CreateCommand extends Command
 {

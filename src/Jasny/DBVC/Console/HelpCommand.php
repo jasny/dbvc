@@ -4,6 +4,7 @@ namespace Jasny\DBVC\Console;
 
 use Jasny\DBVC;
 use Jasny\ConsoleKit\HelpCommand as BaseHelpCommand;
+use Jasny\ConsoleKit\Widgets\Table, ConsoleKit\TextFormater, ConsoleKit\Colors, ConsoleKit\Utils;
 
 /**
  * Displays list of commands and help for command.
@@ -25,19 +26,38 @@ class HelpCommand extends BaseHelpCommand
     public function execute(array $args, array $options = array())
     {
         if (!empty($options['version'])) return $this->showVersion();
-        
-        parent::execute($args, $options);
+
+        if (empty($args)) {
+            $this->writeln("DBVC - Database version control\n");
+            $this->showUsage();
+            $this->showOptions();
+            $this->showCommands();
+        } else {
+            $this->showHelp($args[0], Utils::get($args, 1));
+        }
     }
     
     /**
-     * Show available options and commands
+     * Show a list of available options
      */
-    protected function showCommands()
+    protected function showOptions()
     {
-        $this->writeln("DBVC - Database version control\n");
-        parent::showCommands();
+        $this->writeln("Options:", Colors::YELLOW);
+        
+        $rows = array(
+            array(Colors::colorize('--version', Colors::GREEN), "Show version number"),
+            array(
+                Colors::colorize('--working-dir=DIR', Colors::GREEN),
+                "If specified, use the given directory as working directory"
+            )
+        );
+        
+        $formater = new TextFormater(array('indent' => 2));
+        $table = new Table(null, $rows, array('border'=>false, 'frame'=>false));
+        $this->writeln($formater->format($table->render()));
     }
-    
+
+
     /**
      * Show the version number
      */
