@@ -1,0 +1,28 @@
+{
+    "name": "jasny/dbvc",
+    "description": "Database version control",
+    "keywords": ["database", "db", "mysql", "versioning", "vcs", "git"],
+    "license": "MIT",
+    "homepage": "http://jasny.github.com/dbvc",
+    "authors": [
+        {
+            "name": "Arnold Daniels",
+            "email": "arnold@jasny.net",
+            "homepage": "http://www.jasny.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/jasny/dbvc/issues",
+        "source": "https://github.com/jasny/dbvc"
+    },
+    "require": {
+        "php": ">=5.3.2",
+        "maximebf/consolekit": "1.*",
+        "jasny/consolekit-extension": "1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jasny\\DBVC": "src/"
+        }
+    }
+}
