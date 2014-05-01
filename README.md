@@ -32,8 +32,10 @@ You may [issue a feature request](https://github.com/jasny/dbvc/issues) to suppo
 
 You may [issue a feature request](https://github.com/jasny/dbvc/issues) to support other VCSs.
 
-When selecting 'none', updates are run in [natural order](http://www.php.net/manual/en/function.natsort.php). It's up to
-you to prefix the update files with (for instance) a date, to make sure that run in the correct order
+When using git, the correct order of the updates is automatically found by examining the git log.
+
+When selecting vcs 'none', updates are run in [natural order](http://www.php.net/manual/en/function.natsort.php). It's
+up to you to prefix the update files with (for instance) a date, to make sure that run in the correct order
 
 
 ## Usage
