@@ -33,7 +33,7 @@ class Git
         if (!is_resource($process)) throw new \Exception("Git command failed");
         
         fclose($pipes[0]);
-
+        
         $out = stream_get_contents($pipes[1]);
         $err = stream_get_contents($pipes[2]);
 
@@ -51,7 +51,7 @@ class Git
     public static function isUsed()
     {
         try {
-            self::git('rev-parse');
+            static::git('rev-parse');
         } catch (\Exception $e) {
             return false;
         }
@@ -68,7 +68,9 @@ class Git
      */
     public static function getUpdateFiles($dir)
     {
-        $out = $this->git('log -c --no-merges --pretty="format:" --name-status -p $DIR', ['DIR'=>$dir]);
+        if (!file_exists($dir)) return [];
+        
+        $out = static::git('log -c --no-merges --pretty="format:" --name-status -p $DIR', ['DIR'=>$dir]);
         
         $updates = array();
         foreach (explode("\n", $out) as $line) {
