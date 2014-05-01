@@ -1,5 +1,6 @@
 {
     "name": "jasny/dbvc",
+    "bin": ["bin/dbvc"],
     "description": "Database version control",
     "keywords": ["database", "db", "mysql", "versioning", "vcs", "git"],
     "license": "MIT",
