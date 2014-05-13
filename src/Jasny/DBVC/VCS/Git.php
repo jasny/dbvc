@@ -74,12 +74,11 @@ class Git
         
         $updates = array();
         foreach (explode("\n", $out) as $line) {
-            list($action, $basename) = explode("\t", $line);
-            $update = pathinfo($basename, PATHINFO_FILENAME);
+            list($action, $file) = explode("\t", $line);
+            $update = pathinfo($file, PATHINFO_FILENAME);
             
             if ($action === 'A') {
-                $file = $dir . DIRECTORY_SEPARATOR . $basename;
-                if (is_file($file) && !in_array($update, $updates)) $updates[$update] = $file;
+                if (is_file($file) && !in_array($update, $updates)) $updates[$update] = basename($file);
             } elseif ($action === 'D') {
                 $key = array_search($update, $updates);
                 if ($key !== false) unset($updates[$key]);
