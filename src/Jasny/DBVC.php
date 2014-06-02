@@ -11,7 +11,7 @@ class DBVC
      * Version number
      * @var string
      */
-    const VERSION = "0.1.0";
+    const VERSION = "0.1.3";
     
     
     /**
@@ -35,10 +35,12 @@ class DBVC
     
     /**
      * Class constructor
+     * 
+     * @param object|string  Alternative configuration or config file 
      */
-    public function __construct()
+    public function __construct($config=null)
     {
-        $this->loadConfig();
+        $this->loadConfig($config);
         $this->determineVCS();
         $this->connectDB();
         
@@ -51,14 +53,23 @@ class DBVC
     }
     
     /**
-     * Load the configuration
+     * Load the configuration.
+     * 
+     * @param object|string  Alternative configuration or config file 
      */
-    protected function loadConfig()
+    protected function loadConfig($config=null)
     {
-        if (!file_exists('dbvc.json'))
-            throw new \RuntimeException("DBVC could not find a dbvc.json file in " . getcwd());
+        if (!isset($config)) $config = 'dbvc.json';
         
-        $this->config = json_decode(file_get_contents('dbvc.json'));
+        if (is_scalar($config)) {
+            if (!file_exists($config))
+                throw new \RuntimeException("DBVC could not find the $config config file in " . getcwd());
+
+            $this->config = json_decode(file_get_contents($config));
+        } else {
+            $this->config = self::objectify($config);
+        }
+        
         if (!isset($this->config->datadir)) $this->config->datadir = 'dev';
     }
     
@@ -163,5 +174,24 @@ class DBVC
     public function db()
     {
         return $this->db;
+    }
+    
+    
+    /**
+     * Turn associative array into object
+     * 
+     * @param mixed $var
+     * @return mixed
+     */
+    protected static function objectify($var)
+    {
+        if (is_array($var) && (bool)count(array_filter(array_keys($var), 'is_string'))) {
+            $var = (object)$var;
+            foreach ($var as &$value) {
+                $value = self::objectify($value);
+            }
+        }
+        
+        return $var;
     }
 }

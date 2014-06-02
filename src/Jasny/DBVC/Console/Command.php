@@ -66,6 +66,8 @@ abstract class Command extends \ConsoleKit\Command
      */
     protected function prepare($options)
     {
+        $config = isset($options['config']) ? $options['config'] : null;
+        
         if (isset($options['d'])) $workingDir = $options['d'];
         if (isset($options['working-dir'])) $workingDir = $options['working-dir'];
         if (isset($workingDir) && $workingDir !== true) {
@@ -79,6 +81,6 @@ abstract class Command extends \ConsoleKit\Command
             $this->verbosity = 2;
         }
         
-        $this->dbvc = new DBVC();
+        $this->dbvc = new DBVC($config);
     }
 }

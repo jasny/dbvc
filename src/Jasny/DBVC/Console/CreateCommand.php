@@ -12,6 +12,7 @@ use ConsoleKit\Colors;
  * @opt --quiet           -q  Don't output any message
  * @opt --verbose         -v  Increase verbosity
  * @opt --working-dir=DIR     If specified, use the given directory as working directory
+ * @opt --config=FILE         Use an alternative config file
  */
 class CreateCommand extends Command
 {

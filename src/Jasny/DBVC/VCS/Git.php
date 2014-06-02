@@ -74,7 +74,7 @@ class Git
         
         $updates = array();
         foreach (explode("\n", $out) as $line) {
-            list($action, $file) = explode("\t", $line);
+            list($action, $file) = explode("\t", $line) + [null, null];
             $update = pathinfo($file, PATHINFO_FILENAME);
             
             if ($action === 'A') {

@@ -12,6 +12,7 @@ use ConsoleKit\Colors, ConsoleKit\TextFormater, Jasny\ConsoleKit\Widgets\Table;
  * @opt --quiet           -q  Don't output any message
  * @opt --verbose         -v  Increase verbosity
  * @opt --working-dir=DIR     If specified, use the given directory as working directory
+ * @opt --config=FILE         Use an alternative config file
  * @opt --notification    -n  Output as notification
  * @opt --all             -a  Show a lists with all updates and their status
  * @opt --short           -s  Use abbreviations and exclude annotations

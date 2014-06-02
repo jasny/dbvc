@@ -2,8 +2,6 @@
 
 namespace Jasny\DBVC;
 
-use Jasny\DBVC;
-
 /**
  * Registry of available commands and command runner
  */

@@ -12,6 +12,7 @@ use ConsoleKit\Colors, ConsoleKit\Widgets\Checklist;
  * @opt --quiet           -q  Don't output any message
  * @opt --verbose         -v  Increase verbosity
  * @opt --working-dir=DIR     If specified, use the given directory as working directory
+ * @opt --config=FILE         Use an alternative config file
  * @opt --force           -f  Continue after an error
  */
 class UpdateCommand extends Command
@@ -37,17 +38,17 @@ class UpdateCommand extends Command
         if (!empty($args)) $files = array_intersect_key($files, array_fill_keys($args, null));
         
         $done = $this->dbvc()->getUpdatesDone();
-        $files = array_diff_key($files, array_fill_keys($done, null));
+        $updates = array_diff_key($files, array_fill_keys($done, null));
         
-        if (empty($files)) {
+        if (empty($updates)) {
             $this->writeln("Nothing to do");
             return;
         }
 
         if ($this->verbosity === 0) {
-            $this->runUpdatesQuiet($files);
+            $this->runUpdatesQuiet($updates);
         } else {
-            $this->runUpdates($files);
+            $this->runUpdates($updates);
         }
         
         if ($this->verbosity >= 2) {

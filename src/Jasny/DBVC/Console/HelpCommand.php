@@ -49,6 +49,10 @@ class HelpCommand extends BaseHelpCommand
             array(
                 Colors::colorize('--working-dir=DIR', Colors::GREEN),
                 "If specified, use the given directory as working directory"
+            ),
+            array(
+                Colors::colorize('--config=FILE', Colors::GREEN),
+                "Use an alternative config file"
             )
         );
         
