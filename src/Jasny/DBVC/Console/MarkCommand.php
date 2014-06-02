@@ -13,6 +13,7 @@ use ConsoleKit\Colors, ConsoleKit\Widgets\Checklist;
  * @opt --verbose         -v  Increase verbosity
  * @opt --working-dir=DIR     If specified, use the given directory as working directory
  * @opt --config=FILE         Use an alternative config file
+ * @opt --all             -a  Mark all updates as run
  * @opt --force           -f  Continue after an error
  */
 class MarkCommand extends Command
@@ -27,17 +28,19 @@ class MarkCommand extends Command
     {
         $this->prepare($options);
         $this->force = !empty($options['force']) || !empty($options['f']); 
+        $all = !empty($options['all']) || !empty($options['a']);
         
         if (!$this->databaseIsReady()) {
             exit(1);
         }
         
-        if (empty($args)) {
+        if (empty($args) && !$all) {
             $this->writeerr("Specify which updates should be marked as done.\n");
             return;
         }
         
-        $updates = array_intersect($this->dbvc()->getUpdates(), $args);
+        $updates = $this->dbvc()->getUpdates();
+        if (!$all) $updates = array_intersect($updates, $args);
                 
         if (empty($updates)) {
             $this->writeln("Nothing to do");
