@@ -85,6 +85,6 @@ class Git
             }
         }
         
-        return $updates;
+        return array_reverse($updates);
     }
 }
