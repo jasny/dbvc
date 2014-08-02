@@ -1,5 +1,7 @@
-DBVC - Database version control
--------------------------------
+DBVC
+====
+
+The `dbvc` commandline tool allows you to manage your database schema updates in your version control (git) repository.
 
 ## Configuration
 
