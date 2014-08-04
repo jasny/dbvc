@@ -44,9 +44,9 @@ class Git
     }
     
     /**
-     * Get project base dir
+     * Check if GIT is used as VCS for this project
      * 
-     * @return string
+     * @return boolean
      */
     public static function isUsed()
     {
