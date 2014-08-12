@@ -64,8 +64,9 @@ class DBVC
         if (is_scalar($config)) {
             if (!file_exists($config))
                 throw new \RuntimeException("DBVC could not find the $config config file in " . getcwd());
-
+            
             $this->config = json_decode(file_get_contents($config));
+            if (!$this->config) throw new \Exception("Invalid config file '$config': " . json_last_error_msg());
         } else {
             $this->config = self::objectify($config);
         }
