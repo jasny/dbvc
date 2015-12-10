@@ -2,7 +2,7 @@
 
 namespace Jasny\DBVC\Console;
 
-use ConsoleKit\Colors, ConsoleKit\Widgets\Checklist;
+use ConsoleKit\Colors;
 
 /**
  * Mark an update as run.
